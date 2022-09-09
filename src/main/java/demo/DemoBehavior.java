@@ -7,6 +7,7 @@ import akka.persistence.typed.PersistenceId;
 import akka.persistence.typed.javadsl.CommandHandler;
 import akka.persistence.typed.javadsl.EventHandler;
 import akka.persistence.typed.javadsl.EventSourcedBehavior;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import demo.DemoBehavior.DemoCommand;
 import demo.DemoBehavior.DemoEvent;
 import demo.DemoBehavior.DemoState;
@@ -22,7 +23,7 @@ public class DemoBehavior extends EventSourcedBehavior<DemoCommand, DemoEvent, D
     static class Ping implements DemoCommand {
         final ActorRef<Pong> replyTo;
 
-        Ping(ActorRef<Pong> replyTo) {
+        @JsonCreator Ping(ActorRef<Pong> replyTo) {
             this.replyTo = replyTo;
         }
     }
